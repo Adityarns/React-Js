@@ -1,0 +1,19 @@
+Components
+Komponen adalah blok penyusun utama dalam React. Mereka adalah fungsi atau class yang mengembalikan elemen UI.
+dalam komponen hanya dapat mereturn satu div
+
+function Greeting() {
+  return <h1>Hello, world!</h1>;
+}
+---------------------------------
+Props (Properties)
+Props adalah data yang dikirim ke komponen dari komponen induk. Props bersifat read-only (tidak boleh diubah dari dalam komponen itu sendiri).
+
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+
+// Pemanggilan:
+<Welcome name="Aditya" />
+---------------------------------
+State adalah data yang dikelola di dalam komponen. Berbeda dengan props, state bisa diubah menggunakan setState (untuk class) atau useState (untuk function).
