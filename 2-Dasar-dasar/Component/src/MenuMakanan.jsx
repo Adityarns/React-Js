@@ -15,16 +15,16 @@ export default function MenuResto() {
     <div style={styleMenuResto}>
       <div>
         <div>
+          //Component
           <p>Nama: Nasi Bakar</p>
         </div>
 
-        //Ternary Operator
         {isMakanan == true ? (
           <div>Tipe: Makanan </div>
         ) : (
           <div>Tipe: yang lain</div>
         )}
-        //AndAnd Operator tidak perlu ada elsenya
+
         {isMinuman == true && <div>Tipe: Minuman </div>}
       </div>
     </div>
