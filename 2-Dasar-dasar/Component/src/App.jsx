@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import LoopingMenu from "./LoopingMenu";
 import MenuEvent from "./MenuEvent";
 import MenuResto from "./MenuMakanan";
@@ -7,6 +7,7 @@ import MenuProps from "./MenuProps";
 import MenuUseEffect from "./MenuUseEffect";
 import MenuUseMemo from "./MenuUseMemo";
 import MenuUseState from "./MenuUseState"
+import MenuUseCallback from "./MenuUseCallback";
 
 
 export default function App(){
@@ -14,8 +15,9 @@ export default function App(){
     marginBottom: "100px"
   };
   const [name,setName] = useState("Adit")
+  const [like,setLikes] = useState(0)
 
-  function gantiNama (){
+  const gantiNama = useCallback(() => {
     let channelName = ""
     if (name == "Adit"){
       channelName = "ipul"
@@ -24,7 +26,7 @@ export default function App(){
       channelName = "Adit"
     }
     setName(channelName)
-  }
+  }, [name])
 
 
   return(
@@ -45,9 +47,14 @@ export default function App(){
       //useMemo
       {/* <MenuUseMemo></MenuUseMemo> */}
       //memo
-      <MenuMemo name={name}>
+      <p><button onClick={()=> setLikes(like+1)}>{like} like</button></p>
+      {/* <MenuMemo name={name}>
       </MenuMemo>
-        <button onClick={gantiNama}>Ganti Nama Channel</button>
+      <button onClick={gantiNama}>Ganti Nama Channel</button> */}
+      //useCallback
+      <MenuUseCallback name={name} aksi={gantiNama}></MenuUseCallback>
+      
+
     </div>
   )
 }
