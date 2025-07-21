@@ -26,11 +26,29 @@ export default function App() {
   function handleAddItem(item) {
     setItems([...items, item]);
   }
+  function handleDeleteItem(id) {
+    setItems((items) => items.filter((item) => item.id !== id));
+  }
+  function handleToggleItem(id) {
+    setItems((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, checked: !item.checked } : item
+      )
+    );
+  }
+  function handleClearItems() {
+    setItems([]);
+  }
   return (
     <>
       <Header></Header>
       <Form onAddItems={handleAddItem}></Form>
-      <GroceryList items={items}></GroceryList>
+      <GroceryList
+        items={items}
+        onDeleteItems={handleDeleteItem}
+        onToggleItems={handleToggleItem}
+        onClearItems={handleClearItems}
+      ></GroceryList>
       <Footer></Footer>
     </>
   );
@@ -86,13 +104,18 @@ function Form({ onAddItems }) {
   );
 }
 
-function GroceryList({ items }) {
+function GroceryList({ items, onDeleteItems, onToggleItems, onClearItems }) {
   return (
     <>
       <div className="list">
         <ul>
           {items.map((item) => (
-            <Item item={item} key={item.id}></Item>
+            <Item
+              item={item}
+              key={item.id}
+              onDeleteItems={onDeleteItems}
+              onToggleItems={onToggleItems}
+            ></Item>
           ))}
         </ul>
       </div>
@@ -102,20 +125,24 @@ function GroceryList({ items }) {
           <option value="name">Urutkan berdasarkan nama barang</option>
           <option value="checked">Urutkan berdasarkan ceklis</option>
         </select>
-        <button>Bersihkan Daftar</button>
+        <button onClick={onClearItems}>Bersihkan Daftar</button>
       </div>
     </>
   );
 }
 
-function Item({ item }) {
+function Item({ item, onDeleteItems, onToggleItems }) {
   return (
     <li key={item.id}>
-      <input type="checkbox" />
+      <input
+        type="checkbox"
+        checked={item.checked}
+        onChange={() => onToggleItems(item.id)}
+      />
       <span style={item.checked ? { textDecoration: "line-through" } : {}}>
         {item.quantity} {item.name}
       </span>
-      <button>&times;</button>
+      <button onClick={() => onDeleteItems(item.id)}>&times;</button>
     </li>
   );
 }
