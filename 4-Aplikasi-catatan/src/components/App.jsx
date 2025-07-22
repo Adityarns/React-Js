@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Header from "./components/Header";
-import Form from "./components/Form";
-import GroceryList from "./components/GroceryList";
-import Footer from "./components/Footer";
+import Header from "./Header";
+import Form from "./Form";
+import GroceryList from "./GroceryList";
+import Footer from "./Footer";
 const groceryItems = [
   {
     id: 1,
